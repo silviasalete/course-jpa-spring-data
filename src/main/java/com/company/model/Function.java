@@ -1,9 +1,13 @@
 package com.company.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -14,6 +18,9 @@ public class Function {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String description;
+	
+	@OneToMany(mappedBy = "function", fetch = FetchType.EAGER)
+	private List<Employees> employees;
 	
 	public Integer getId() {
 		return id;
@@ -27,6 +34,13 @@ public class Function {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public List<Employees> getEmployees() {
+		return employees;
+	}
+	public void setEmployees(List<Employees> employees) {
+		this.employees = employees;
+	}
+	
 	@Override
 	public String toString() {
 		return "Function [id=" + id + ", description=" + description + "]";
