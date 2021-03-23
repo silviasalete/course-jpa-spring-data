@@ -8,20 +8,23 @@ import org.springframework.stereotype.Service;
 
 import com.company.model.Employees;
 import com.company.model.Function;
+import com.company.model.WorkUnity;
 import com.company.repository.EmployeesRepository;
 import com.company.repository.FunctionRepository;
+import com.company.repository.WorkUnityRepository;
 
 @Service
 public class EmployeesService {
 	
 	private EmployeesRepository employeesRepository;
 	private FunctionRepository functionRepository;
+	private WorkUnityRepository workUnityRepository;
 	
-	public EmployeesService(EmployeesRepository employeesRepository,FunctionRepository functionRepository) {
+	public EmployeesService(EmployeesRepository employeesRepository,FunctionRepository functionRepository, WorkUnityRepository workUnityRepository) {
 		
 		this.employeesRepository = employeesRepository;
 		this.functionRepository = functionRepository;
-		
+		this.workUnityRepository = workUnityRepository;
 	}
 
 	public void initial(Scanner scanner) {
@@ -81,6 +84,22 @@ public class EmployeesService {
 		employees.setCPF(scanner.nextInt());;
 		System.out.println("Which employee salary?");
 		employees.setSalary(scanner.nextDouble());
+		System.out.println("Which function?");
+		Iterable<Function> findAll = functionRepository.findAll();
+		findAll.forEach(function -> {
+			System.out.println(function.getId()+" - "+function.getDescription());
+		});
+		Optional<Function> function = functionRepository.findById(scanner.nextInt());
+		employees.setFunction(function.get());
+		
+		System.out.println("Which work unity?");
+		Iterable<WorkUnity> findAllWorkUnity = workUnityRepository.findAll();
+		findAllWorkUnity.forEach(workUnity -> {
+			System.out.println(workUnity.getId()+" - "+workUnity.getDescription());
+		});
+		Optional<WorkUnity> workUnity = workUnityRepository.findById(scanner.nextInt());
+		employees.setWorkUnity(workUnity.get());
+		
 //		System.out.println("What is the employee's hiring date?");	
 		Date today = new Date();
 		employees.setHiringDate(today);
@@ -105,6 +124,14 @@ public class EmployeesService {
 		});
 		Optional<Function> function = functionRepository.findById(scanner.nextInt());
 		employees.setFunction(function.get());
+		
+		System.out.println("Which work unity?");
+		Iterable<WorkUnity> findAllWorkUnity = workUnityRepository.findAll();
+		findAllWorkUnity.forEach(workUnity -> {
+			System.out.println(workUnity.getId()+" - "+workUnity.getDescription());
+		});
+		Optional<WorkUnity> workUnity = workUnityRepository.findById(scanner.nextInt());
+		employees.setWorkUnity(workUnity.get());
 		
 //		System.out.println("What is the employee's hiring date?");	
 		Date today = new Date();

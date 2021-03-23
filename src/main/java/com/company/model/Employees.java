@@ -21,6 +21,8 @@ public class Employees {
 	
 	@ManyToOne
 	private Function function;
+	@ManyToOne
+	private WorkUnity workUnity;
 	
 	public Integer getId() {
 		return id;
@@ -56,14 +58,20 @@ public class Employees {
 	public Function getFunction() {
 		return function;
 	}
-	
 	public void setFunction(Function function) {
 		this.function = function;
+	}
+	public WorkUnity getWorkUnity() {
+		return workUnity;
+	}
+	public void setWorkUnity(WorkUnity workUnity) {
+		this.workUnity = workUnity;
 	}
 	@Override
 	public String toString() {
 		return "Employees [id=" + id + ", name=" + name + ", CPF=" + CPF + ", salary=" + salary + ", hiringDate="
-				+ hiringDate + ", function=" + function + "]";
+				+ hiringDate + ", function=" + function.getDescription() + ", workUnity=" + workUnity.getDescription() + "]";
 	}
+	
 
 }
