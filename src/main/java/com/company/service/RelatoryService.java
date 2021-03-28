@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.company.model.Employees;
+import com.company.model.EmployessProjection;
 import com.company.repository.EmployeesRepository;
 
 @Service
@@ -23,6 +24,7 @@ public class RelatoryService {
 		System.out.println("1 - Find By Name");
 		System.out.println("2 - Find Salary by Name");
 		System.out.println("3 - Find CPF by Name");
+		System.out.println("4 - Find CPF and Name by Id");
 		int action = scanner.nextInt();
 		switch (action) {
 		case 1:
@@ -35,6 +37,10 @@ public class RelatoryService {
 			break;
 		case 3:
 			findCPFByNameNativeQuery(scanner);
+			
+			break;
+		case 4:
+			findCPFandNameByProjection(scanner);
 			
 			break;
 
@@ -67,5 +73,17 @@ public class RelatoryService {
 			Double salary = employee.getSalary();
 			System.out.println(salary);
 		}
+	}
+
+	public void findCPFandNameByProjection(Scanner scanner) {
+		System.out.println("What is id");
+		List<EmployessProjection> employees = employeesRepository.findCPFandNameByProjection(scanner.nextInt());
+		for (EmployessProjection employee : employees) {
+			Integer cpf = employee.getCPF();
+			String name = employee.getName();
+			System.out.println("Name: "+name);
+			System.out.println("CPF: "+cpf);
+		}
+		
 	}
 }
