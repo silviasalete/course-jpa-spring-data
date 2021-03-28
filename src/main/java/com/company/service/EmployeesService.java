@@ -72,7 +72,7 @@ public class EmployeesService {
 	private void view(Scanner scanner) {
 		System.out.println("What page do you want to view?");
 		Integer numberPage = scanner.nextInt();
-		Pageable pageable = PageRequest.of(numberPage, 2, Sort.unsorted());
+		Pageable pageable = PageRequest.of(numberPage, 6, Sort.by(Sort.Direction.ASC, "name"));
 		
 		Page<Employees> employees = employeesRepository.findAll(pageable);
 		
