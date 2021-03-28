@@ -4,6 +4,10 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.company.model.Employees;
@@ -47,7 +51,7 @@ public class EmployeesService {
 			break;
 
 		case 3:
-			view();
+			view(scanner);
 			break;
 
 		case 4:
@@ -65,9 +69,16 @@ public class EmployeesService {
 		employeesRepository.deleteById(scanner.nextInt());
 	}
 
-	private void view() {
-		Iterable<Employees> findAll = employeesRepository.findAll();
-		findAll.forEach(employee -> {
+	private void view(Scanner scanner) {
+		System.out.println("What page do you want to view?");
+		Integer numberPage = scanner.nextInt();
+		Pageable pageable = PageRequest.of(numberPage, 2, Sort.unsorted());
+		
+		Page<Employees> employees = employeesRepository.findAll(pageable);
+		
+		System.out.println("Page current "+employees.getNumber());
+		System.out.println("Total Elements "+employees.getTotalElements());
+		employees.forEach(employee -> {
 			System.out.println(employee.toString());
 		});
 	}
