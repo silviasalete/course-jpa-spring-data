@@ -21,10 +21,15 @@ public class RelatoryService {
 		System.out.println("RELATORY");
 		System.out.println("What action do you to make:");
 		System.out.println("1 - Find By Name");
+		System.out.println("2 - Find Salary by Name");
 		int action = scanner.nextInt();
 		switch (action) {
 		case 1:
 			findByName(scanner);
+			
+			break;
+		case 2:
+			findSalaryByNameJPQL(scanner);
 			
 			break;
 
@@ -38,6 +43,15 @@ public class RelatoryService {
 		List<Employees> employees = employeesRepository.findByName(scanner.next());
 		for (Employees employee : employees) {
 			System.out.println(employee.getName());
+		}
+	}
+	
+	private void findSalaryByNameJPQL(Scanner scanner) {
+		System.out.println("What is name");
+		List<Employees> employees = employeesRepository.findSalaryByNameJPQL(scanner.next());
+		for (Employees employee : employees) {
+			Double salary = employee.getSalary();
+			System.out.println(salary);
 		}
 	}
 }
