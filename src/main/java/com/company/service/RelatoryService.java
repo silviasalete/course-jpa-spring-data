@@ -22,6 +22,7 @@ public class RelatoryService {
 		System.out.println("What action do you to make:");
 		System.out.println("1 - Find By Name");
 		System.out.println("2 - Find Salary by Name");
+		System.out.println("3 - Find CPF by Name");
 		int action = scanner.nextInt();
 		switch (action) {
 		case 1:
@@ -32,9 +33,22 @@ public class RelatoryService {
 			findSalaryByNameJPQL(scanner);
 			
 			break;
+		case 3:
+			findCPFByNameNativeQuery(scanner);
+			
+			break;
 
 		default:
 			break;
+		}
+	}
+
+	private void findCPFByNameNativeQuery(Scanner scanner) {
+		System.out.println("What is name");
+		List<Employees> employees = employeesRepository.findCPFByNameNativeQuery(scanner.next());
+		for (Employees employee : employees) {
+			Integer cpf = employee.getCPF();
+			System.out.println(cpf);
 		}
 	}
 

@@ -15,4 +15,7 @@ public interface EmployeesRepository extends CrudRepository<Employees, Integer> 
 	
 	@Query("SELECT e FROM Employees e WHERE e.name = :name")
 	List<Employees> findSalaryByNameJPQL(String name);
+	
+	@Query(value = "SELECT * FROM bd_account.employees WHERE name = :name", nativeQuery = true)
+	List<Employees> findCPFByNameNativeQuery(String name);
 }
