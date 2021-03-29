@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import  com.company.service.FunctionService;
+import com.company.service.RelatoryDynamicEmployees;
 import com.company.service.RelatoryService;
 import com.company.service.WorkUnityService;
 import  com.company.service.EmployeesService;
@@ -18,13 +19,15 @@ public class CourseJpaSpringDataApplication implements CommandLineRunner {
 	private final EmployeesService employeesService;
 	private final WorkUnityService workUnityService;
 	private final RelatoryService relatoryService;
+	private final RelatoryDynamicEmployees relatoryDynamicEmployees;
 	private boolean system = true;
 
-	public CourseJpaSpringDataApplication(RelatoryService relatoryService, FunctionService functionService,EmployeesService employeesService, WorkUnityService workUnityService) {
+	public CourseJpaSpringDataApplication(RelatoryDynamicEmployees relatoryDynamicEmployees,RelatoryService relatoryService, FunctionService functionService,EmployeesService employeesService, WorkUnityService workUnityService) {
 		this.functionService = functionService;
 		this.employeesService = employeesService;
 		this.workUnityService =  workUnityService;
 		this.relatoryService =relatoryService;
+		this.relatoryDynamicEmployees =relatoryDynamicEmployees;
 	}
 
 	public static void main(String[] args) {
@@ -42,6 +45,7 @@ public class CourseJpaSpringDataApplication implements CommandLineRunner {
 			System.out.println("2 - Employees");	
 			System.out.println("3 - WorkUnity");				
 			System.out.println("4 - Relatory");				
+			System.out.println("5 - RelatoryDynamicEmployees");				
 			int action = scanner.nextInt();
 			
 			if (action == 1) {
@@ -52,6 +56,8 @@ public class CourseJpaSpringDataApplication implements CommandLineRunner {
 				workUnityService.initial(scanner);
 			}else if (action == 4) {
 				relatoryService.initial(scanner);
+			}else if (action == 5) {
+				relatoryDynamicEmployees.initial(scanner);
 			}else {
 				this.system = false;
 			}

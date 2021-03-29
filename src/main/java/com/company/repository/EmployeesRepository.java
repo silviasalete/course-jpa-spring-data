@@ -2,6 +2,7 @@ package com.company.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -10,7 +11,7 @@ import com.company.model.Employees;
 import com.company.model.EmployessProjection;
 
 @Repository
-public interface EmployeesRepository extends PagingAndSortingRepository<Employees, Integer> {
+public interface EmployeesRepository extends PagingAndSortingRepository<Employees, Integer>, JpaSpecificationExecutor<Employees> {
 
 	List<Employees> findByName(String name);
 	
